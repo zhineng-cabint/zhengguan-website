@@ -117,7 +117,10 @@
     </div>
     <nav class="nav-menu" id="navMenu">
       <button class="nav-link active" data-page="home" onclick="goPage('home')">首页</button>
+      <button class="nav-link" data-page="about" onclick="goPage('about')">关于我们</button>
       <button class="nav-link" data-page="products" onclick="goPage('products')">产品中心</button>
+      <button class="nav-link" data-page="solutions" onclick="goPage('solutions')">服务方案</button>
+      <button class="nav-link" data-page="cases" onclick="goPage('cases')">客户案例</button>
       <button class="nav-link" data-page="contact" onclick="goPage('contact')">联系我们</button>
     </nav>
     <div class="nav-actions">
@@ -129,6 +132,7 @@
 </header>
 
 <main>
+<!-- 首页 -->
 <section class="page active" id="page-home">
   <div class="hero">
     <div class="container">
@@ -152,15 +156,64 @@
   </section>
 </section>
 
+<!-- 关于我们 -->
+<section class="page" id="page-about">
+  <div class="container" style="padding-top:80px;padding-bottom:80px;text-align:center;">
+    <h2 style="font-size:36px;color:var(--navy);margin-bottom:20px;">关于臻冠科技</h2>
+    <p style="max-width:800px;margin:0 auto;color:var(--muted);font-size:16px;line-height:2;">广州臻冠信息科技有限公司，是国内专业的全品类智能柜研发、定制生产与销售一体化企业。拥有成熟的钣金加工、结构设计、硬件集成、软件系统开发能力，可为品牌方、工程集成商提供方案设计、样机测试、批量生产、贴牌代工一站式服务。</p>
+  </div>
+</section>
+
+<!-- 产品中心 (完整版6个产品) -->
 <section class="page" id="page-products">
   <div class="container" style="padding-top:60px;padding-bottom:80px">
-    <div class="section-head"><h2>产品中心</h2><p>实物展示（数据由 CMS 后台提供）</p></div>
-    <div class="product-grid" id="productGrid">
-      <!-- 这里的内容会由下方的 JavaScript 自动读取 products.json 生成 -->
+    <div class="section-head"><h2>产品中心</h2><p>全系智能存储设备 · 支持标准采购、非标定制、OEM/ODM 代工</p></div>
+    <div class="product-grid">
+      <article class="product-card">
+        <div class="product-media"><img src="kuaidigui.png" alt="智能快递柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传kuaidigui.png'"></div>
+        <div class="product-body"><span class="ptag">01 · 快递柜</span><h3>智能快递柜</h3><p>广泛应用小区、产业园、园区驿站、企业宿舍等场景。支持多格口自由搭配、扫码/刷卡/人脸多种存取方式。</p></div>
+      </article>
+      <article class="product-card">
+        <div class="product-media"><img src="cunbaogui.png" alt="智能存包柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传cunbaogui.png'"></div>
+        <div class="product-body"><span class="ptag">02 · 存包柜</span><h3>智能存包柜</h3><p>适配商场、景区、游泳馆、体育馆、公共服务大厅。支持免费寄存、计时计费、限时寄存多种模式。</p></div>
+      </article>
+      <article class="product-card">
+        <div class="product-media"><img src="qucangui.png" alt="智能取餐柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传qucangui.png'"></div>
+        <div class="product-body"><span class="ptag">03 · 取餐柜</span><h3>智能取餐柜</h3><p>适用于写字楼、园区、学校食堂、团餐配送。可选常温、恒温保温、紫外线消毒版本，干净卫生。</p></div>
+      </article>
+      <article class="product-card">
+        <div class="product-media"><img src="gongjugui.png" alt="智能工具柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传gongjugui.png'"></div>
+        <div class="product-body"><span class="ptag">04 · 工具柜</span><h3>智能工具柜</h3><p>专为工厂、工地、企业设备管理设计。支持员工权限分级、工具领用、归还记录、库存追踪。</p></div>
+      </article>
+      <article class="product-card">
+        <div class="product-media"><img src="shoujigui.png" alt="智能手机寄存柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传shoujigui.png'"></div>
+        <div class="product-body"><span class="ptag">05 · 手机柜</span><h3>智能手机寄存柜</h3><p>适用于工厂、考场、会议涉密场所。支持批量寄存、一键清柜、单独开箱，满足禁机管理需求。</p></div>
+      </article>
+      <article class="product-card">
+        <div class="product-media"><img src="feibiaogui.png" alt="非标定制智能柜" onerror="this.src='https://via.placeholder.com/600x400?text=请上传feibiaogui.png'"></div>
+        <div class="product-body"><span class="ptag">06 · 非标定制</span><h3>非标定制智能柜</h3><p>特殊尺寸、特殊结构、户外防护、恒温控温、专属系统UI、专属LOGO外观、第三方API对接，均可从零开发。</p></div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- 服务方案 -->
+<section class="page" id="page-solutions">
+  <div class="container" style="padding-top:80px;padding-bottom:80px;text-align:center;">
+    <h2 style="font-size:36px;color:var(--navy);margin-bottom:20px;">服务方案优选</h2>
+    <p style="max-width:800px;margin:0 auto;color:var(--muted);font-size:16px;line-height:2;">提供 ODM 整案定制、OEM 贴牌代工、标准机型采购三种合作模式。从需求沟通、方案评估、样机制作到批量生产、交付落地，全流程标准化管理。</p>
+  </div>
+</section>
+
+<!-- 客户案例 -->
+<section class="page" id="page-cases">
+  <div class="container" style="padding-top:80px;padding-bottom:80px;text-align:center;">
+    <h2 style="font-size:36px;color:var(--navy);margin-bottom:20px;">客户案例</h2>
+    <p style="max-width:800px;margin:0 auto;color:var(--muted);font-size:16px;line-height:2;">已为产业园区、高端写字楼、工厂厂区、公共景区等完成大量智能柜落地项目，积累丰富的场景定制与批量代工经验。</p>
+  </div>
+</section>
+
+<!-- 联系我们 -->
 <section class="page" id="page-contact">
   <div class="container" style="padding-top:60px;padding-bottom:80px">
     <div class="section-head"><h2>联系我们</h2></div>
@@ -197,8 +250,7 @@
 </footer>
 
 <script>
-  // 页面切换路由
-  const pages = ['home','products','contact'];
+  const pages = ['home','about','products','solutions','cases','contact'];
   function goPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
@@ -206,28 +258,6 @@
     document.getElementById('navMenu').classList.remove('open');
     window.scrollTo({top: 0, behavior: 'instant'});
   }
-
-  // 自动读取 products.json 并渲染到页面
-  document.addEventListener('DOMContentLoaded', () => {
-    fetch('/products.json')
-      .then(res => res.json())
-      .then(data => {
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = data.map(p => `
-          <article class="product-card">
-            <div class="product-media">
-              <img src="/${p.image}" alt="${p.name}" loading="lazy">
-            </div>
-            <div class="product-body">
-              <span class="ptag">${p.tag}</span>
-              <h3>${p.name}</h3>
-              <p>${p.desc}</p>
-            </div>
-          </article>
-        `).join('');
-      })
-      .catch(err => console.error('读取产品数据失败:', err));
-  });
 </script>
 </body>
 </html>
