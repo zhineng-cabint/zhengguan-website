@@ -11,6 +11,8 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://你的域名/og-cover.jpg">
 <link rel="canonical" href="https://你的域名/">
+<!-- 引入 Netlify 身份验证组件（必须放在首页，否则邮件链接无法识别） -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
   :root{
     --navy:#0B2447;
@@ -96,7 +98,7 @@
 
   /* ---------- 通用区块 ---------- */
   section{padding:88px 0}
-  /* 关键修复：页面级容器不再继承 88px 内边距，避免顶部白色空带 */
+  /* 修复：页面级容器不继承 section 的上下内边距，避免深色 hero 上方出现白条 */
   section.page{padding:0}
   .section-head{text-align:center;margin-bottom:56px}
   .section-head .eyebrow{
@@ -319,12 +321,11 @@
   }
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
-  /* 关键修复：图片容器改为按比例自适应，图片完整显示不裁切 */
+  /* 产品图：竖版 3:4 + 悬停放大 */
   .product-media{
     position:relative;
     width:100%;
-    aspect-ratio:16/10;      /* 卡片等高，比例可自行调整 */
-    min-height:180px;        /* 老浏览器兜底 */
+    aspect-ratio:3/4;          /* 竖版比例 */
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
     background:#EEF4FD;
@@ -336,9 +337,15 @@
   .product-media img{
     position:relative;z-index:2;
     width:100%;height:100%;
-    object-fit:contain;      /* 完整显示图片；要铺满改成 cover */
+    object-fit:contain;        /* 完整显示，不裁切 */
     object-position:center;
     display:block;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1);
+    will-change:transform;
+  }
+  /* 悬停放大：仅桌面端（有鼠标的设备）触发，触屏不误触 */
+  @media (hover:hover) and (pointer:fine){
+    .product-card:hover .product-media img{transform:scale(1.07)}
   }
   .product-media .ph{
     position:absolute;z-index:1;
@@ -566,6 +573,8 @@
     display:flex;justify-content:space-between;align-items:center;gap:16px;
     padding:22px 0;font-size:12.5px;color:#6F84A0;flex-wrap:wrap;
   }
+  .foot-bottom .admin-link{color:#6F84A0;transition:color .2s}
+  .foot-bottom .admin-link:hover{color:var(--gold-light)}
   @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:34px}}
   @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
 
@@ -1306,12 +1315,25 @@
 
     <div class="foot-bottom">
       <span>© 2025 广州臻冠信息科技有限公司 版权所有</span>
-      <span>全品类智能柜定制 · OEM/ODM 源头工厂</span>
+      <span>全品类智能柜定制 · OEM/ODM 源头工厂 · <a class="admin-link" href="/admin/">后台管理</a></span>
     </div>
   </div>
 </footer>
 
 <script>
+/* ========== Netlify 身份验证（修复：初始化以识别重置密码链接） ========== */
+if (window.netlifyIdentity) {
+  // 必须调用 init()，组件才会去拦截 URL 里的 #recovery_token 并弹窗要求设置密码
+  window.netlifyIdentity.init();
+
+  // 登录成功后，自动跳转到后台
+  window.netlifyIdentity.on("login", user => {
+    if (!window.location.pathname.startsWith('/admin')) {
+      document.location.href = "/admin/";
+    }
+  });
+}
+
 /* ========== 页面路由 ========== */
 const pages = ['home','about','products','solutions','cases','contact'];
 let booted = false;
@@ -1387,7 +1409,6 @@ window.addEventListener('scroll',()=>{
 document.getElementById('contactForm').addEventListener('submit', function(e){
   e.preventDefault();
 
-  // 注意：必须用 elements 取输入框，form.name 是表单自身属性
   const els = e.target.elements;
   const name = (els['name'].value || '').trim();
   const phone = (els['phone'].value || '').trim();
@@ -1408,14 +1429,6 @@ document.getElementById('contactForm').addEventListener('submit', function(e){
   const submitBtn = form.querySelector('.form-submit');
   submitBtn.disabled = true;
 
-  /* ------------------------------------------------------------
-     真实上线时，把下面这段替换为你的接口，例如 Formspree：
-     fetch('https://formspree.io/f/xxxxxx', {method:'POST', body:new FormData(form)})
-       .then(r=>{ if(!r.ok) throw new Error(); tip.classList.add('show'); form.reset(); })
-       .catch(()=> alert('提交失败，请直接致电 020-32369552'))
-       .finally(()=> submitBtn.disabled = false);
-     下面是演示模式（不发送请求）：
-  ------------------------------------------------------------ */
   tip.classList.add('show');
   form.reset();
   submitBtn.disabled = false;
