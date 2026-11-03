@@ -11,7 +11,6 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="臻冠智存">
 <meta property="og:url" content="https://gzzhengguan.com/">
-<!-- 分享图现在直接放在根目录 -->
 <meta property="og:image" content="https://gzzhengguan.com/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://gzzhengguan.com/">
@@ -71,7 +70,6 @@
     position:relative;
     overflow:hidden;
   }
-  /* 图案白色镂空效果 */
   .brand-mark svg{width:32px;height:32px;color:#fff;position:relative;z-index:2}
   .brand-mark::after {
     content:"";position:absolute;inset:0;
@@ -339,14 +337,13 @@
   }
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
-  /* 产品图：横版 4:3 容器 + 图片按原比例完整显示 + 内边距留白 */
   .product-media{
     position:relative;
     width:100%;
-    aspect-ratio:4/3;              
+    height:260px;
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
-    padding:22px;                  
+    padding:40px 30px;
     background:#EEF4FD;
   }
   .product-media::after{
@@ -398,7 +395,7 @@
     .product-body{padding:22px 22px 24px}
     .product-body h3{font-size:18px}
     .product-body p{font-size:13.5px}
-    .product-media{padding:16px}
+    .product-media{height: 220px; padding: 30px 20px;}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
 
@@ -589,7 +586,6 @@
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
   .foot-brand .brand{margin-bottom:18px}
   
-  /* 页脚 Logo 适配调整 */
   .foot-brand .brand-mark {
     background:linear-gradient(135deg,#1E6FD9 0%,#0B2447 100%);
   }
@@ -656,22 +652,14 @@
 <!-- 导航 -->
 <header id="header">
   <div class="container nav">
-    <!-- 新版 Logo 开始 -->
     <div class="brand" role="button" tabindex="0" aria-label="返回首页" onclick="goPage('home')">
       <div class="brand-mark">
-        <!-- 纯手工绘制的高精度 SVG：模拟原图盒子+人脸芯片 -->
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- 左侧镂空侧面 -->
           <path d="M10 30 L50 10 L50 90 L10 70 Z" fill="rgba(255,255,255,0.15)"/>
-          <!-- 正面人物轮廓和芯片 -->
           <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" fill="#fff"/>
-          <!-- 芯片底座 -->
           <rect x="60" y="40" width="14" height="14" rx="2" fill="#0B2447"/>
-          <!-- 芯片引脚 -->
           <path d="M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- 芯片内部细节 -->
           <rect x="64" y="44" width="6" height="6" rx="1" fill="none" stroke="#fff" stroke-width="1"/>
-          <!-- 底部切角描边增强立体感 -->
           <path d="M10 70 L50 90 L90 70" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
           <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" stroke="rgba(11,36,71,0.1)" stroke-width="1"/>
         </svg>
@@ -681,7 +669,6 @@
         <span>ZHEN GUAN SMART STORAGE</span>
       </div>
     </div>
-    <!-- 新版 Logo 结束 -->
 
     <nav class="nav-menu" id="navMenu">
       <button class="nav-link active" data-page="home" onclick="goPage('home')">首页</button>
@@ -912,90 +899,9 @@
         <p>我司主营全系智能存储设备，支持标准机型采购、非标场景定制、软硬件二次开发、品牌贴牌代工，满足各行各业智能寄存、智能存取、智能管控需求。</p>
       </div>
 
-      <div class="product-grid">
-        <article class="product-card">
-          <div class="product-media pm-1">
-            <!-- 适配了根目录的 kuaidigui.png -->
-            <img src="kuaidigui.png" alt="智能快递柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">01 · 快递柜</span>
-            <h3>智能快递柜</h3>
-            <p>广泛应用小区、产业园、园区驿站、企业宿舍等场景。支持多格口自由搭配、扫码/刷卡/人脸多种存取方式。自带后台管理系统、取件通知、逾期管理、数据统计功能。户外机型支持防雨防锈，适合长期户外落地项目。</p>
-            <div class="product-feats"><span>多格口组合</span><span>扫码/刷卡/人脸</span><span>后台管理</span><span>户外防雨</span></div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-media pm-2">
-            <!-- 适配了根目录的 cunbaogui.png -->
-            <img src="cunbaogui.png" alt="智能存包柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><circle cx="15" cy="12" r="1.5"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">02 · 存包柜</span>
-            <h3>智能存包柜</h3>
-            <p>适配商场、景区、游泳馆、体育馆、公共服务大厅。支持免费寄存、计时计费、限时寄存多种模式。机身防锈防水、防撬安全结构，适合大流量公共场所使用。</p>
-            <div class="product-feats"><span>计时计费</span><span>防锈防水</span><span>防撬结构</span><span>大流量场景</span></div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-media pm-3">
-            <!-- 适配了根目录的 qucangui.png -->
-            <img src="qucangui.png" alt="智能取餐柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h18M5 13a7 7 0 0 1 14 0M2 17h20M8 21h8"/><path d="M9 6c0-1 .6-2 1.5-2M14 6c0-1 .6-2 1.5-2" opacity=".6"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">03 · 取餐柜</span>
-            <h3>智能取餐柜</h3>
-            <p>适用于写字楼、园区、学校食堂、团餐配送、外卖暂存场景。可选常温、恒温保温、紫外线消毒版本，解决用餐高峰拥堵、无人值守暂存问题，干净卫生、高效便捷。</p>
-            <div class="product-feats"><span>恒温保温</span><span>紫外线消毒</span><span>无人值守</span><span>外卖暂存</span></div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-media pm-4">
-            <!-- 适配了根目录的 gongjugui.png -->
-            <img src="gongjugui.png" alt="智能工具柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">04 · 工具柜</span>
-            <h3>智能工具柜</h3>
-            <p>专为工厂、工地、企业设备管理设计。支持员工权限分级、工具领用、归还记录、库存追踪，有效规范工具管理、降低设备遗失损耗，实现智能化资产管理。</p>
-            <div class="product-feats"><span>权限分级</span><span>领用记录</span><span>库存追踪</span><span>资产管理</span></div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-media pm-5">
-            <!-- 适配了根目录的 shoujigui.png -->
-            <img src="shoujigui.png" alt="智能手机寄存柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">05 · 手机柜</span>
-            <h3>智能手机寄存柜</h3>
-            <p>适用于工厂、考场、会议涉密场所、企业军事化管理。支持批量寄存、一键清柜、单独开箱，满足厂区保密、禁机管理需求。</p>
-            <div class="product-feats"><span>批量寄存</span><span>一键清柜</span><span>单独开箱</span><span>涉密管理</span></div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-media pm-6">
-            <!-- 适配了根目录的 feibiaogui.png -->
-            <img src="feibiaogui.png" alt="非标定制智能柜" loading="lazy" onerror="this.remove()">
-            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">06 · 非标定制</span>
-            <h3>非标定制智能柜</h3>
-            <p>除标准品类外，我司支持全场景非标定制：特殊尺寸、特殊结构、户外防护、恒温控温、智能权限、专属系统 UI、专属 LOGO 外观、第三方系统 API 对接，均可根据项目需求从零 ODM 开发。</p>
-            <div class="product-feats"><span>特殊尺寸</span><span>户外防护</span><span>专属UI</span><span>API对接</span></div>
-          </div>
-        </article>
+      <!-- 动态加载产品数据的容器 -->
+      <div class="product-grid" id="product-grid">
+        <!-- 产品数据将由 JS 从 products.json 自动注入 -->
       </div>
 
       <div class="product-advantages">
@@ -1496,6 +1402,39 @@ document.getElementById('contactForm').addEventListener('submit', async function
     submitBtn.textContent = originalText;
   }
 });
+
+/* ========== 动态加载产品数据 ========== */
+async function loadProducts() {
+  try {
+    const res = await fetch('/products.json');
+    const products = await res.json();
+    const grid = document.getElementById('product-grid');
+    if(!grid) return;
+    
+    products.forEach(p => {
+      const feats = p.features.map(f => `<span>${f}</span>`).join('');
+      grid.innerHTML += `
+        <article class="product-card">
+          <div class="product-media ${p.theme}">
+            <img src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.remove()">
+            <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="ptag">${p.tag}</span>
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <div class="product-feats">${feats}</div>
+          </div>
+        </article>
+      `;
+    });
+  } catch (err) {
+    console.error("加载产品数据失败，请检查 products.json 是否存在：", err);
+  }
+}
+
+// 执行动态加载
+loadProducts();
 </script>
 </body>
 </html>
