@@ -1,0 +1,20 @@
+media:
+  input: "/"
+  output: "/"
+
+content:
+  - name: "products"
+    label: "产品列表"
+    path: "products.json"
+    type: "file"
+    fields:
+      - name: "items"
+        label: "所有产品"
+        widget: "list"
+        fields:
+          - {label: "卡片主题色", name: "theme", widget: "select", options: ["pm-1", "pm-2", "pm-3", "pm-4", "pm-5", "pm-6"]}
+          - {label: "标签 (如 01 · 快递柜)", name: "tag", widget: "string"}
+          - {label: "产品名称", name: "title", widget: "string"}
+          - {label: "产品图片", name: "image", widget: "image"}
+          - {label: "产品描述", name: "desc", widget: "text"}
+          - {label: "功能特性标签", name: "features", widget: "list"}
