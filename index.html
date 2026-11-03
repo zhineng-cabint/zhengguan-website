@@ -9,10 +9,13 @@
 <meta property="og:title" content="广州臻冠信息科技有限公司｜一站式智能存储定制">
 <meta property="og:description" content="臻于匠心，冠于智柜。全品类智能柜定制、生产、OEM/ODM 代工。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://你的域名/og-cover.jpg">
-<link rel="canonical" href="https://你的域名/">
-<!-- 引入 Netlify 身份验证组件（必须放在首页，否则邮件链接无法识别） -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<meta property="og:site_name" content="臻冠智存">
+<meta property="og:url" content="https://gzzhengguan.com/">
+<meta property="og:image" content="https://gzzhengguan.com/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gzzhengguan.com/">
+<!-- 内联 SVG favicon，无需额外文件 -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B2447'/%3E%3Cpath d='M10 30 L50 10 L50 90 L10 70 Z' fill='%23ffffff' fill-opacity='.18'/%3E%3Cpath d='M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z' fill='%23ffffff'/%3E%3Crect x='60' y='40' width='14' height='14' rx='2' fill='%230B2447'/%3E%3Cpath d='M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
   :root{
     --navy:#0B2447;
@@ -44,9 +47,7 @@
   .container{max-width:1200px;margin:0 auto;padding:0 24px}
 
   /* ---------- 顶部导航 ---------- */
-  .topbar{
-    background:var(--navy-3);color:#C7D4E6;font-size:13px;
-  }
+  .topbar{background:var(--navy-3);color:#C7D4E6;font-size:13px;}
   .topbar .container{display:flex;justify-content:space-between;align-items:center;height:38px;flex-wrap:wrap}
   .topbar .hot{color:var(--gold-light);font-weight:600;letter-spacing:.3px}
   .topbar .sep{margin:0 10px;opacity:.4}
@@ -58,16 +59,33 @@
   }
   header.scrolled{box-shadow:0 6px 24px rgba(11,36,71,.08)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+  
+  /* ---------- 新版 Logo 样式 ---------- */
+  .brand{display:flex;align-items:center;gap:14px;cursor:pointer}
   .brand-mark{
-    width:42px;height:42px;border-radius:11px;flex-shrink:0;
-    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 55%,var(--gold) 130%);
+    width:48px;height:48px;border-radius:12px;flex-shrink:0;
+    background:linear-gradient(135deg,#1E6FD9 0%,#0B2447 100%);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 16px rgba(11,36,71,.28);
+    box-shadow:0 6px 16px rgba(11,36,71,.25);
+    position:relative;
+    overflow:hidden;
   }
-  .brand-mark svg{width:24px;height:24px;color:#fff}
-  .brand-text strong{display:block;font-size:17px;line-height:1.25;color:var(--navy);letter-spacing:.3px}
-  .brand-text span{display:block;font-size:10.5px;color:var(--muted);letter-spacing:1.6px;text-transform:uppercase}
+  /* 图案白色镂空效果 */
+  .brand-mark svg{width:32px;height:32px;color:#fff;position:relative;z-index:2}
+  .brand-mark::after {
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg, rgba(255,255,255,.2) 0%, transparent 50%);
+    z-index:1;
+  }
+  .brand-text{display:flex;flex-direction:column;justify-content:center;}
+  .brand-text strong{
+    display:block;font-size:22px;line-height:1.1;color:var(--navy);
+    font-weight:800;letter-spacing:1px;
+  }
+  .brand-text span{
+    display:block;font-size:10px;color:var(--navy);
+    letter-spacing:.8px;text-transform:uppercase;font-weight:600;margin-top:3px;
+  }
 
   .nav-menu{display:flex;align-items:center;gap:4px}
   .nav-link{
@@ -98,7 +116,6 @@
 
   /* ---------- 通用区块 ---------- */
   section{padding:88px 0}
-  /* 修复：页面级容器不继承 section 的上下内边距，避免深色 hero 上方出现白条 */
   section.page{padding:0}
   .section-head{text-align:center;margin-bottom:56px}
   .section-head .eyebrow{
@@ -321,13 +338,14 @@
   }
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
-  /* 产品图：竖版 3:4 + 悬停放大 */
+  /* 产品图：横版 4:3 容器 + 图片按原比例完整显示 + 内边距留白 */
   .product-media{
     position:relative;
     width:100%;
-    aspect-ratio:3/4;          /* 竖版比例 */
+    aspect-ratio:4/3;              
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
+    padding:22px;                  
     background:#EEF4FD;
   }
   .product-media::after{
@@ -336,24 +354,25 @@
   }
   .product-media img{
     position:relative;z-index:2;
-    width:100%;height:100%;
-    object-fit:contain;        /* 完整显示，不裁切 */
-    object-position:center;
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit:contain;
     display:block;
+    border-radius:8px;             
     transition:transform .55s cubic-bezier(.22,.61,.36,1);
     will-change:transform;
   }
-  /* 悬停放大：仅桌面端（有鼠标的设备）触发，触屏不误触 */
   @media (hover:hover) and (pointer:fine){
-    .product-card:hover .product-media img{transform:scale(1.07)}
+    .product-card:hover .product-media img{transform:scale(1.05)}
   }
   .product-media .ph{
     position:absolute;z-index:1;
-    width:58px;height:58px;
+    width:46px;height:46px;
     color:rgba(255,255,255,.92);
     pointer-events:none;
   }
-  /* 六种背景色，与原来一致 */
   .pm-1{background:linear-gradient(135deg,#1E6FD9,#3B8BE8)}
   .pm-2{background:linear-gradient(135deg,#0B2447,#133A63)}
   .pm-3{background:linear-gradient(135deg,#D4A441,#E8B85A)}
@@ -372,6 +391,13 @@
   .product-feats span{
     font-size:12.5px;color:var(--navy-2);background:var(--light);
     padding:5px 12px;border-radius:7px;border:1px solid var(--border);
+  }
+  @media(min-width:1100px){
+    .product-grid{grid-template-columns:repeat(3,1fr);gap:22px}
+    .product-body{padding:22px 22px 24px}
+    .product-body h3{font-size:18px}
+    .product-body p{font-size:13.5px}
+    .product-media{padding:16px}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
 
@@ -547,11 +573,13 @@
     box-shadow:0 10px 26px rgba(11,36,71,.25);
   }
   .form-submit:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(11,36,71,.32)}
+  .form-submit:disabled{opacity:.65;cursor:not-allowed;transform:none;box-shadow:none}
   .form-tip{
     display:none;margin-top:16px;padding:13px 18px;border-radius:10px;
     background:#F0FDF4;border:1px solid #BBF7D0;color:#15803D;font-size:14px;text-align:center;
   }
   .form-tip.show{display:block;animation:pageIn .4s}
+  .form-tip.error{background:#FEF2F2;border-color:#FECACA;color:#B91C1C}
   @media(max-width:900px){.contact-wrap{grid-template-columns:1fr}}
   @media(max-width:560px){.form-row{grid-template-columns:1fr}.contact-form-box,.contact-info{padding:30px 22px}}
 
@@ -559,8 +587,14 @@
   footer{background:var(--navy-3);color:#94A9C4;padding:64px 0 0}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
   .foot-brand .brand{margin-bottom:18px}
-  .foot-brand .brand-text strong{color:#fff}
-  .foot-brand .brand-text span{color:#7E93AD}
+  
+  /* 页脚 Logo 适配调整 */
+  .foot-brand .brand-mark {
+    background:linear-gradient(135deg,#1E6FD9 0%,#0B2447 100%);
+  }
+  .foot-brand .brand-text strong{color:#fff;font-size:22px;}
+  .foot-brand .brand-text span{color:#94A9C4;}
+  
   .foot-brand p{font-size:13.5px;line-height:1.85;max-width:300px}
   .foot-col h4{font-size:14.5px;color:#fff;margin-bottom:18px;letter-spacing:.5px}
   .foot-col ul{display:grid;gap:11px}
@@ -573,8 +607,6 @@
     display:flex;justify-content:space-between;align-items:center;gap:16px;
     padding:22px 0;font-size:12.5px;color:#6F84A0;flex-wrap:wrap;
   }
-  .foot-bottom .admin-link{color:#6F84A0;transition:color .2s}
-  .foot-bottom .admin-link:hover{color:var(--gold-light)}
   @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:34px}}
   @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
 
@@ -597,9 +629,9 @@
     .topbar .container{justify-content:center;height:auto;padding:7px 16px;gap:4px}
     .topbar .hide-sm{display:none}
     .brand-text span{display:none}
+    .brand-text strong{font-size:20px;}
   }
 
-  /* ---------- 无障碍：尊重系统减少动画 ---------- */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
     *,*::before,*::after{
@@ -623,15 +655,32 @@
 <!-- 导航 -->
 <header id="header">
   <div class="container nav">
+    <!-- 新版 Logo 开始 -->
     <div class="brand" role="button" tabindex="0" aria-label="返回首页" onclick="goPage('home')">
       <div class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+        <!-- 纯手工绘制的高精度 SVG：模拟原图盒子+人脸芯片 -->
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 左侧镂空侧面 -->
+          <path d="M10 30 L50 10 L50 90 L10 70 Z" fill="rgba(255,255,255,0.15)"/>
+          <!-- 正面人物轮廓和芯片 -->
+          <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" fill="#fff"/>
+          <!-- 芯片底座 -->
+          <rect x="60" y="40" width="14" height="14" rx="2" fill="#0B2447"/>
+          <!-- 芯片引脚 -->
+          <path d="M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- 芯片内部细节 -->
+          <rect x="64" y="44" width="6" height="6" rx="1" fill="none" stroke="#fff" stroke-width="1"/>
+          <!-- 底部切角描边增强立体感 -->
+          <path d="M10 70 L50 90 L90 70" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+          <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" stroke="rgba(11,36,71,0.1)" stroke-width="1"/>
+        </svg>
       </div>
       <div class="brand-text">
-        <strong>臻冠科技</strong>
-        <span>ZHENGUAN TECH</span>
+        <strong>臻冠智存</strong>
+        <span>ZHEN GUAN SMART STORAGE</span>
       </div>
     </div>
+    <!-- 新版 Logo 结束 -->
 
     <nav class="nav-menu" id="navMenu">
       <button class="nav-link active" data-page="home" onclick="goPage('home')">首页</button>
@@ -659,7 +708,6 @@
 
 <!-- ================= 首页 ================= -->
 <section class="page active" id="page-home">
-  <!-- Hero -->
   <div class="hero">
     <div class="container">
       <div class="hero-inner">
@@ -686,7 +734,6 @@
     </div>
   </div>
 
-  <!-- 首页简介 -->
   <section>
     <div class="container intro-grid">
       <div class="intro-text">
@@ -722,7 +769,6 @@
     </div>
   </section>
 
-  <!-- 产品品类概览 -->
   <section style="background:var(--light)">
     <div class="container">
       <div class="section-head">
@@ -765,7 +811,6 @@
     </div>
   </section>
 
-  <!-- 核心优势 -->
   <section class="adv-section">
     <div class="container">
       <div class="section-head">
@@ -784,7 +829,6 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <div class="cta-band">
     <div class="container cta-inner">
       <div>
@@ -868,7 +912,6 @@
       </div>
 
       <div class="product-grid">
-        <!-- 1 快递柜 -->
         <article class="product-card">
           <div class="product-media pm-1">
             <img src="images/product-kuaidigui.jpg" alt="智能快递柜" loading="lazy" onerror="this.remove()">
@@ -882,7 +925,6 @@
           </div>
         </article>
 
-        <!-- 2 存包柜 -->
         <article class="product-card">
           <div class="product-media pm-2">
             <img src="images/product-cunbaogui.jpg" alt="智能存包柜" loading="lazy" onerror="this.remove()">
@@ -896,7 +938,6 @@
           </div>
         </article>
 
-        <!-- 3 取餐柜 -->
         <article class="product-card">
           <div class="product-media pm-3">
             <img src="images/product-qucangui.jpg" alt="智能取餐柜" loading="lazy" onerror="this.remove()">
@@ -910,7 +951,6 @@
           </div>
         </article>
 
-        <!-- 4 工具柜 -->
         <article class="product-card">
           <div class="product-media pm-4">
             <img src="images/product-gongjugui.jpg" alt="智能工具柜" loading="lazy" onerror="this.remove()">
@@ -924,7 +964,6 @@
           </div>
         </article>
 
-        <!-- 5 手机柜 -->
         <article class="product-card">
           <div class="product-media pm-5">
             <img src="images/product-shoujigui.jpg" alt="智能手机寄存柜" loading="lazy" onerror="this.remove()">
@@ -938,7 +977,6 @@
           </div>
         </article>
 
-        <!-- 6 非标定制 -->
         <article class="product-card">
           <div class="product-media pm-6">
             <img src="images/product-feibiao.jpg" alt="非标定制智能柜" loading="lazy" onerror="this.remove()">
@@ -953,7 +991,6 @@
         </article>
       </div>
 
-      <!-- 产品优势 -->
       <div class="product-advantages">
         <h3>核心产品优势</h3>
         <div class="pa-grid">
@@ -1038,7 +1075,6 @@
     </div>
   </section>
 
-  <!-- 定制流程 -->
   <section class="flow-section">
     <div class="container">
       <div class="section-head">
@@ -1057,7 +1093,6 @@
     </div>
   </section>
 
-  <!-- 增值服务 -->
   <section style="padding-top:0">
     <div class="container value-add">
       <div class="section-head">
@@ -1193,7 +1228,6 @@
   <section>
     <div class="container">
       <div class="contact-wrap">
-        <!-- 左侧信息 -->
         <div class="contact-info">
           <h3>欢迎合作</h3>
           <p>欢迎各行业工程商、集成商、采购方、品牌企业咨询洽谈，我们将免费为您提供项目方案、配置建议、精准报价。</p>
@@ -1217,7 +1251,6 @@
           </div>
         </div>
 
-        <!-- 右侧表单 -->
         <div class="contact-form-box">
           <h3>在线咨询</h3>
           <p>如有智能柜采购、场景定制、贴牌代工、批量项目需求，欢迎随时联系，一对一工程师对接服务，快速落地您的智能存储项目。</p>
@@ -1253,8 +1286,10 @@
               <label for="f-message">需求描述 <span class="req">*</span></label>
               <textarea id="f-message" name="message" placeholder="请简要描述您的需求，例如产品品类、应用场景、尺寸/功能要求、预计数量等……" required></textarea>
             </div>
+            <!-- 简单蜜罐字段，机器人容易填写，正常用户看不到 -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
             <button type="submit" class="btn form-submit">提交咨询</button>
-            <div class="form-tip" id="formTip">✓ 提交成功！我们将尽快与您联系。</div>
+            <div class="form-tip" id="formTip" role="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -1269,11 +1304,19 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
+        <!-- 页脚 Logo 改为同款 -->
         <div class="brand" role="button" tabindex="0" aria-label="返回首页" onclick="goPage('home')">
           <div class="brand-mark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 30 L50 10 L50 90 L10 70 Z" fill="rgba(255,255,255,0.15)"/>
+              <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" fill="#fff"/>
+              <rect x="60" y="40" width="14" height="14" rx="2" fill="#0B2447"/>
+              <path d="M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="64" y="44" width="6" height="6" rx="1" fill="none" stroke="#fff" stroke-width="1"/>
+              <path d="M10 70 L50 90 L90 70" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            </svg>
           </div>
-          <div class="brand-text"><strong>臻冠科技</strong><span>ZHENGUAN TECH</span></div>
+          <div class="brand-text"><strong>臻冠智存</strong><span>ZHEN GUAN SMART STORAGE</span></div>
         </div>
         <p>广州臻冠信息科技有限公司，专注全品类智能柜定制、生产、销售与 OEM/ODM 代工，一站式智能存储解决方案。</p>
       </div>
@@ -1315,25 +1358,12 @@
 
     <div class="foot-bottom">
       <span>© 2025 广州臻冠信息科技有限公司 版权所有</span>
-      <span>全品类智能柜定制 · OEM/ODM 源头工厂 · <a class="admin-link" href="/admin/">后台管理</a></span>
+      <span>全品类智能柜定制 · OEM/ODM 源头工厂</span>
     </div>
   </div>
 </footer>
 
 <script>
-/* ========== Netlify 身份验证（修复：初始化以识别重置密码链接） ========== */
-if (window.netlifyIdentity) {
-  // 必须调用 init()，组件才会去拦截 URL 里的 #recovery_token 并弹窗要求设置密码
-  window.netlifyIdentity.init();
-
-  // 登录成功后，自动跳转到后台
-  window.netlifyIdentity.on("login", user => {
-    if (!window.location.pathname.startsWith('/admin')) {
-      document.location.href = "/admin/";
-    }
-  });
-}
-
 /* ========== 页面路由 ========== */
 const pages = ['home','about','products','solutions','cases','contact'];
 let booted = false;
@@ -1353,7 +1383,6 @@ function goPage(id, fromPop){
   menu.classList.remove('open');
   document.getElementById('hamburger').setAttribute('aria-expanded','false');
 
-  // 首次加载 / 前进后退用 replace，正常点击才 push，避免历史记录死循环
   if(history.pushState){
     (fromPop || !booted)
       ? history.replaceState(null,'','#'+id)
@@ -1366,17 +1395,15 @@ function goPage(id, fromPop){
   window.scrollTo({top:0,behavior:'auto'});
 }
 
-// 浏览器前进/后退
 window.addEventListener('popstate',()=>{
   goPage(location.hash.replace('#','') || 'home', true);
 });
 
-// 初始加载
 document.addEventListener('DOMContentLoaded',()=>{
   goPage(location.hash.replace('#','') || 'home', true);
 });
 
-/* ========== 移动端菜单（含 aria 状态） ========== */
+/* ========== 移动端菜单 ========== */
 const hamburger = document.getElementById('hamburger');
 hamburger.addEventListener('click',()=>{
   const menu = document.getElementById('navMenu');
@@ -1405,34 +1432,62 @@ window.addEventListener('scroll',()=>{
   if(el) el.textContent = '© ' + new Date().getFullYear() + ' 广州臻冠信息科技有限公司 版权所有';
 })();
 
-/* ========== 表单提交 ========== */
-document.getElementById('contactForm').addEventListener('submit', function(e){
+/* ========== 表单提交（POST 到边缘函数 /api/contact） ========== */
+document.getElementById('contactForm').addEventListener('submit', async function(e){
   e.preventDefault();
 
-  const els = e.target.elements;
-  const name = (els['name'].value || '').trim();
-  const phone = (els['phone'].value || '').trim();
-  const message = (els['message'].value || '').trim();
-
-  if(!name || !phone || !message){
-    alert('请填写姓名、联系电话和需求描述');
-    return;
-  }
-  // 宽松校验：手机号或固话均可
-  if(!/^1[3-9]\d{9}$/.test(phone) && !/^[\d\s\-+()]{7,20}$/.test(phone)){
-    alert('请输入有效的联系电话');
-    return;
-  }
-
   const form = e.target;
+  const els = form.elements;
   const tip = document.getElementById('formTip');
   const submitBtn = form.querySelector('.form-submit');
-  submitBtn.disabled = true;
 
-  tip.classList.add('show');
-  form.reset();
-  submitBtn.disabled = false;
-  setTimeout(()=>tip.classList.remove('show'), 5000);
+  const payload = {
+    name:    (els['name'].value    || '').trim(),
+    phone:   (els['phone'].value   || '').trim(),
+    company: (els['company'].value || '').trim(),
+    type:    (els['type'].value    || '').trim(),
+    message: (els['message'].value || '').trim(),
+    website: (els['website'].value || '').trim() // 蜜罐字段
+  };
+
+  // 前端校验
+  if(!payload.name || !payload.phone || !payload.message){
+    tip.textContent = '请填写姓名、联系电话和需求描述';
+    tip.className = 'form-tip show error';
+    return;
+  }
+  if(!/^1[3-9]\d{9}$/.test(payload.phone) && !/^[\d\s\-+()]{7,20}$/.test(payload.phone)){
+    tip.textContent = '请输入有效的联系电话';
+    tip.className = 'form-tip show error';
+    return;
+  }
+
+  // 提交
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '提交中…';
+  tip.className = 'form-tip';
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+
+    form.reset();
+    tip.textContent = '✓ 提交成功！我们将尽快与您联系。';
+    tip.className = 'form-tip show';
+    setTimeout(()=>{ tip.className = 'form-tip'; }, 6000);
+  } catch(err){
+    tip.textContent = '提交失败，请稍后重试，或直接致电 020-32369552。';
+    tip.className = 'form-tip show error';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
 });
 </script>
 </body>
