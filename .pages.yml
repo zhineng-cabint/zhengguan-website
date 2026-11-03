@@ -11,6 +11,7 @@ content:
       - name: "items"
         label: "所有产品"
         widget: "list"
+        summary: '{{fields.title}}'  # 让后台列表直接显示产品名称
         fields:
           - {label: "卡片主题色", name: "theme", widget: "select", options: ["pm-1", "pm-2", "pm-3", "pm-4", "pm-5", "pm-6"]}
           - {label: "标签 (如 01 · 快递柜)", name: "tag", widget: "string"}
