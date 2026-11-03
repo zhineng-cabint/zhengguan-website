@@ -182,22 +182,13 @@
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
   .product-media{
-    position:relative;
-    width:100%;
-    height:320px; 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    padding:24px; 
+    position:relative;width:100%;height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:24px; 
   }
   .product-media::after{
-    content:"";position:absolute;width:220px;height:220px;border-radius:50%;
-    background:rgba(255,255,255,.12);top:-80px;right:-60px;pointer-events:none;z-index:1;
+    content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);top:-80px;right:-60px;pointer-events:none;z-index:1;
   }
   .product-media img{
-    position:relative;z-index:2;max-width:100%;max-height:100%;width:auto;height:auto;
-    object-fit:contain; display:block;border-radius:8px;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform;
+    position:relative;z-index:2;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain; display:block;border-radius:8px;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform;
   }
   .product-media img[data-error="true"]{opacity:0;pointer-events:none}
   @media (hover:hover) and (pointer:fine){.product-card:hover .product-media img{transform:scale(1.04)}}
@@ -315,27 +306,26 @@
   .ci-item .ci-value a:hover{color:var(--gold-light)}
   .ci-item .ci-value small{display:block;font-size:12.5px;font-weight:400;color:#9DB3CE;margin-top:2px}
 
+  /* 恢复原生表单样式 */
   .contact-form-box{background:#fff;border:1px solid var(--border);border-radius:22px;padding:42px 38px;box-shadow:var(--shadow);}
   .contact-form-box h3{font-size:22px;color:var(--navy);margin-bottom:8px}
   .contact-form-box > p{font-size:14px;color:var(--muted);margin-bottom:28px}
-  
-  /* 腾讯问卷 iframe 容器 */
-  .form-iframe-container {
-    width: 100%;
-    height: 520px; /* 设置合适的高度 */
-    background: #F8FAFC;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .form-iframe-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
+  .form-grid{display:grid;gap:18px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .field label{display:block;font-size:13.5px;font-weight:600;color:#334155;margin-bottom:7px}
+  .field label .req{color:#DC2626}
+  .field input,.field select,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:10px;font-size:14.5px;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:all .2s;}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,111,217,.12);}
+  .field textarea{resize:vertical;min-height:110px}
+  .form-submit{width:100%;justify-content:center;padding:15px;font-size:15.5px;margin-top:6px;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;box-shadow:0 10px 26px rgba(11,36,71,.25);}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(11,36,71,.32)}
+  .form-submit:disabled{opacity:.65;cursor:not-allowed;transform:none;box-shadow:none}
+  .form-tip{display:none;margin-top:16px;padding:13px 18px;border-radius:10px;background:#F0FDF4;border:1px solid #BBF7D0;color:#15803D;font-size:14px;text-align:center;}
+  .form-tip.show{display:block;animation:pageIn .4s}
+  .form-tip.error{background:#FEF2F2;border-color:#FECACA;color:#B91C1C}
   @media(max-width:900px){.contact-wrap{grid-template-columns:1fr}}
-  @media(max-width:560px){.form-iframe-container{height: 600px;}.contact-form-box,.contact-info{padding:30px 22px}}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr}.contact-form-box,.contact-info{padding:30px 22px}}
+  .hp-field{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
   footer{background:var(--navy-3);color:#94A9C4;padding:64px 0 0}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -830,13 +820,46 @@
 
         <div class="contact-form-box">
           <h3>在线咨询</h3>
-          <p>如有智能柜采购、场景定制、贴牌代工、批量项目需求，欢迎随时填写表单，一对一工程师为您提供方案。</p>
+          <p>如有智能柜采购、场景定制、贴牌代工、批量项目需求，欢迎随时填写下方表单，一对一工程师为您提供方案。</p>
           
-          <!-- 腾讯问卷嵌入代码 -->
-          <div class="form-iframe-container">
-            <iframe src="https://wj.qq.com/s2/28522875/4on9/" frameborder="0" width="100%" height="100%" allowfullscreen="true"></iframe>
-          </div>
-          
+          <!-- 恢复原生表单 -->
+          <form class="form-grid" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name">您的姓名 <span class="req">*</span></label>
+                <input type="text" id="f-name" name="name" placeholder="请输入姓名" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="f-phone">联系电话 <span class="req">*</span></label>
+                <input type="tel" id="f-phone" name="phone" placeholder="请输入手机号" autocomplete="tel" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-company">公司名称</label>
+                <input type="text" id="f-company" name="company" placeholder="请输入公司名称" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="f-type">合作意向</label>
+                <select id="f-type" name="type">
+                  <option value="">请选择</option>
+                  <option>ODM 整案定制</option>
+                  <option>OEM 贴牌代工</option>
+                  <option>标准机型采购</option>
+                  <option>非标定制开发</option>
+                  <option>其他合作</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-message">需求描述 <span class="req">*</span></label>
+              <textarea id="f-message" name="message" placeholder="请简要描述您的需求，例如产品品类、应用场景、尺寸/功能要求、预计数量等……" required></textarea>
+            </div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
+            <button type="submit" class="btn form-submit">提交咨询</button>
+            <div class="form-tip" id="formTip" role="status" aria-live="polite"></div>
+          </form>
+
         </div>
       </div>
     </div>
@@ -959,7 +982,69 @@ window.addEventListener('scroll', () => {
 });
 
 /* =========================================================
-   3. 加载产品数据
+   3. 表单提交逻辑（接入 Formspree 接收数据，需替换为你自己的地址）
+   ========================================================= */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const form = e.target;
+    const els = form.elements;
+    const tip = document.getElementById('formTip');
+    const submitBtn = form.querySelector('.form-submit');
+
+    const payload = {
+      name:    (els['name'].value    || '').trim(),
+      phone:   (els['phone'].value   || '').trim(),
+      company: (els['company'].value || '').trim(),
+      type:    (els['type'].value    || '').trim(),
+      message: (els['message'].value || '').trim()
+    };
+
+    if(!payload.name || !payload.phone || !payload.message){
+      tip.textContent = '请填写姓名、联系电话和需求描述';
+      tip.className = 'form-tip show error';
+      return;
+    }
+    if(!/^1[3-9]\d{9}$/.test(payload.phone) && !/^[\d\s\-+()]{7,20}$/.test(payload.phone)){
+      tip.textContent = '请输入有效的联系电话';
+      tip.className = 'form-tip show error';
+      return;
+    }
+
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '提交中…';
+    tip.className = 'form-tip';
+
+    try {
+      // 【注意】把下面的 URL 替换成你在 formspree.io 申请的专属链接
+      // 目前这是一个测试链接，你收到邮件的概率极低，请一定去注册替换！
+      const res = await fetch('https://formspree.io/f/mvoqjvzy', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      
+      if(!res.ok) throw new Error('网络错误');
+      
+      form.reset();
+      tip.textContent = '✓ 提交成功！我们将尽快与您联系。';
+      tip.className = 'form-tip show';
+      setTimeout(() => { tip.className = 'form-tip'; }, 6000);
+    } catch(err){
+      // 如果提交失败，给一个友好的提示
+      tip.textContent = '提交失败，请直接致电 020-32369552。';
+      tip.className = 'form-tip show error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+}
+
+/* =========================================================
+   4. 加载产品数据
    ========================================================= */
 function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
