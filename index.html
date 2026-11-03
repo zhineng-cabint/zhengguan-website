@@ -1407,7 +1407,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
 async function loadProducts() {
   try {
     const res = await fetch('/products.json');
-    const products = await res.json();
+    const data = await res.json();
+    const products = data.items; // 这里修改了：读取 items 数组
     const grid = document.getElementById('product-grid');
     if(!grid) return;
     
