@@ -268,7 +268,6 @@
   .cat-card p{font-size:14px;color:var(--muted);line-height:1.7}
   @media(max-width:900px){.cat-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:600px){.cat-grid{grid-template-columns:1fr}}
-  /* 2 列布局下 9 张卡最后一张铺满整行，避免半行空位 */
   @media(max-width:900px) and (min-width:601px){
     .cat-grid .cat-card:last-child{grid-column:1 / -1}
   }
@@ -359,52 +358,53 @@
   }
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
+  /* 修复：取消深色背景边框，去除遮挡圈，放大图片 */
   .product-media{
     position:relative;
     width:100%;
-    height:320px;
-    display:grid;
-    place-items:center;
+    height:320px; /* 手机默认高度 */
+    display:flex;
+    align-items:center;
+    justify-content:center;
     overflow:hidden;
-    padding:20px;
-    background:#EEF4FD;
+    padding:10px; /* 减小内边距，让图片更大 */
+    background:#F8FAFC; /* 统一清爽底色 */
+    border-bottom:1px solid var(--border);
   }
-  .product-media::after{
-    content:"";position:absolute;width:200px;height:200px;border-radius:50%;
-    background:rgba(255,255,255,.12);top:-70px;right:-50px;
-    pointer-events:none;z-index:1;
-  }
+  
+  /* 移除之前会导致视觉干扰的白色大圆圈遮罩 */
+  .product-media::after{ display:none; }
+
   .product-media img{
-    position:relative;z-index:2;
-    max-width:100%;
-    max-height:100%;
-    width:auto;
-    height:auto;
-    object-fit:contain;
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    object-fit:contain; /* 保证图片完整、不裁剪 */
     display:block;
-    border-radius:8px;
+    border-radius:6px;
     transition:transform .55s cubic-bezier(.22,.61,.36,1);
     will-change:transform;
   }
   .product-media img[data-error="true"]{opacity:0;pointer-events:none}
+  
   @media (hover:hover) and (pointer:fine){
-    .product-card:hover .product-media img{transform:scale(1.05)}
+    .product-card:hover .product-media img{transform:scale(1.03)}
   }
+  
   .product-media .ph{
-    position:absolute;z-index:1;
-    width:46px;height:46px;
-    color:rgba(255,255,255,.92);
+    position:absolute;
+    z-index:1;
+    width:40px;
+    height:40px;
+    color:#CBD5E1; /* 浅灰色占位，配合浅底 */
     pointer-events:none;
   }
-  .pm-1{background:linear-gradient(135deg,#1E6FD9,#3B8BE8)}
-  .pm-2{background:linear-gradient(135deg,#0B2447,#133A63)}
-  .pm-3{background:linear-gradient(135deg,#D4A441,#E8B85A)}
-  .pm-4{background:linear-gradient(135deg,#0F766E,#14B8A6)}
-  .pm-5{background:linear-gradient(135deg,#7C3AED,#A78BFA)}
-  .pm-6{background:linear-gradient(135deg,#9A3412,#EA580C)}
-  .pm-7{background:linear-gradient(135deg,#5B21B6,#8B5CF6)}
-  .pm-8{background:linear-gradient(135deg,#B45309,#F59E0B)}
-  .pm-9{background:linear-gradient(135deg,#0E7490,#06B6D4)}
+
+  /* 统一覆盖原有的深色渐变背景，让边框彻底消失 */
+  .pm-1,.pm-2,.pm-3,.pm-4,.pm-5,.pm-6,.pm-7,.pm-8,.pm-9 {
+    background:#F8FAFC;
+  }
 
   .product-body{padding:28px 28px 30px;flex:1;display:flex;flex-direction:column}
   .product-body .ptag{
@@ -419,19 +419,20 @@
     padding:5px 12px;border-radius:7px;border:1px solid var(--border);
   }
 
+  /* 大屏 3 列时的图片高度与内边距 */
   @media(min-width:1100px){
     .product-grid{grid-template-columns:repeat(3,1fr);gap:22px}
     .product-body{padding:22px 22px 24px}
     .product-body h3{font-size:18px}
     .product-body p{font-size:13.5px}
-    .product-media{height:280px;padding:20px}
+    .product-media{height:280px;padding:10px;}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
   @media(max-width:860px){
-    .product-media{height:240px;padding:16px}
+    .product-media{height:260px;padding:10px;}
   }
   @media(max-width:520px){
-    .product-media{height:200px}
+    .product-media{height:220px}
     .product-body{padding:22px 20px 24px}
   }
 
@@ -1269,294 +1270,4 @@
                 <label for="f-phone">联系电话 <span class="req">*</span></label>
                 <input type="tel" id="f-phone" name="phone" placeholder="请输入手机号" autocomplete="tel" required>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="f-company">公司名称</label>
-                <input type="text" id="f-company" name="company" placeholder="请输入公司名称" autocomplete="organization">
-              </div>
-              <div class="field">
-                <label for="f-type">合作意向</label>
-                <select id="f-type" name="type">
-                  <option value="">请选择</option>
-                  <option>ODM 整案定制</option>
-                  <option>OEM 贴牌代工</option>
-                  <option>标准机型采购</option>
-                  <option>非标定制开发</option>
-                  <option>其他合作</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="f-message">需求描述 <span class="req">*</span></label>
-              <textarea id="f-message" name="message" placeholder="请简要描述您的需求，例如产品品类、应用场景、尺寸/功能要求、预计数量等……" required></textarea>
-            </div>
-            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
-            <button type="submit" class="btn form-submit">提交咨询</button>
-            <div class="form-tip" id="formTip" role="status" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</section>
-
-</main>
-
-<!-- 页脚 -->
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="brand" role="button" tabindex="0" aria-label="返回首页" onclick="goPage('home')">
-          <div class="brand-mark">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 30 L50 10 L50 90 L10 70 Z" fill="rgba(255,255,255,0.15)"/>
-              <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" fill="#fff"/>
-              <rect x="60" y="40" width="14" height="14" rx="2" fill="#0B2447"/>
-              <path d="M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-              <rect x="64" y="44" width="6" height="6" rx="1" fill="none" stroke="#fff" stroke-width="1"/>
-              <path d="M10 70 L50 90 L90 70" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="brand-text"><strong>臻冠智存</strong><span>ZHEN GUAN SMART STORAGE</span></div>
-        </div>
-        <p>广州臻冠信息科技有限公司，专注全品类智能柜定制、生产、销售与 OEM/ODM 代工，一站式智能存储解决方案。</p>
-      </div>
-
-      <div class="foot-col">
-        <h4>快速导航</h4>
-        <ul>
-          <li><a onclick="goPage('home')">首页</a></li>
-          <li><a onclick="goPage('about')">关于我们</a></li>
-          <li><a onclick="goPage('products')">产品中心</a></li>
-          <li><a onclick="goPage('solutions')">服务方案</a></li>
-          <li><a onclick="goPage('cases')">客户案例</a></li>
-          <li><a onclick="goPage('contact')">联系我们</a></li>
-        </ul>
-      </div>
-
-      <div class="foot-col">
-        <h4>产品中心</h4>
-        <ul>
-          <li><a onclick="goPage('products')">微信扫码柜</a></li>
-          <li><a onclick="goPage('products')">人脸识别存包柜</a></li>
-          <li><a onclick="goPage('products')">掌纹识别存包柜</a></li>
-          <li><a onclick="goPage('products')">收费扫码存包柜</a></li>
-          <li><a onclick="goPage('products')">物品自提柜</a></li>
-          <li><a onclick="goPage('products')">非标定制智能柜</a></li>
-        </ul>
-      </div>
-
-      <div class="foot-col">
-        <h4>联系方式</h4>
-        <ul class="foot-contact">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:02032369552">020-32369552</a></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><a href="mailto:2292454958@qq.com">2292454958@qq.com</a></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>广州市花都区新雅街道团结村团结路自编 3-8</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>周一至周五 9:00 - 18:00</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="foot-bottom">
-      <span>© 2025 广州臻冠信息科技有限公司 版权所有</span>
-      <span>全品类智能柜定制 · OEM/ODM 源头工厂</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* =========================================================
-   页面路由：纯 hash 方案
-   ========================================================= */
-const pages = ['home','about','products','solutions','cases','contact'];
-
-function goPage(id){
-  if(!pages.includes(id)) id = 'home';
-
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById('page-' + id);
-  if(target) target.classList.add('active');
-
-  document.querySelectorAll('.nav-link').forEach(l => {
-    l.classList.toggle('active', l.dataset.page === id);
-  });
-
-  const menu = document.getElementById('navMenu');
-  menu.classList.remove('open');
-  const hb = document.getElementById('hamburger');
-  if(hb) hb.setAttribute('aria-expanded', 'false');
-
-  if(location.hash !== '#' + id) location.hash = id;
-
-  window.scrollTo({ top: 0, behavior: 'auto' });
-}
-
-window.addEventListener('hashchange', () => {
-  goPage(location.hash.replace('#','') || 'home');
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  goPage(location.hash.replace('#','') || 'home');
-});
-
-/* ========== 移动端菜单 ========== */
-const hamburger = document.getElementById('hamburger');
-hamburger.addEventListener('click', () => {
-  const menu = document.getElementById('navMenu');
-  const open = menu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', String(open));
-});
-
-/* ========== 品牌 Logo 键盘可访问 ========== */
-document.querySelectorAll('.brand').forEach(b => {
-  b.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      goPage('home');
-    }
-  });
-});
-
-/* ========== 导航阴影 ========== */
-window.addEventListener('scroll', () => {
-  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 8);
-});
-
-/* ========== 页脚年份自动更新 ========== */
-(function(){
-  const el = document.querySelector('.foot-bottom span');
-  if(el) el.textContent = '© ' + new Date().getFullYear() + ' 广州臻冠信息科技有限公司 版权所有';
-})();
-
-/* =========================================================
-   表单提交：POST /api/contact，失败降级 mailto
-   ========================================================= */
-document.getElementById('contactForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-
-  const form = e.target;
-  const els = form.elements;
-  const tip = document.getElementById('formTip');
-  const submitBtn = form.querySelector('.form-submit');
-
-  const payload = {
-    name:    (els['name'].value    || '').trim(),
-    phone:   (els['phone'].value   || '').trim(),
-    company: (els['company'].value || '').trim(),
-    type:    (els['type'].value    || '').trim(),
-    message: (els['message'].value || '').trim(),
-    website: (els['website'].value || '').trim()
-  };
-
-  if(!payload.name || !payload.phone || !payload.message){
-    tip.textContent = '请填写姓名、联系电话和需求描述';
-    tip.className = 'form-tip show error';
-    return;
-  }
-  if(!/^1[3-9]\d{9}$/.test(payload.phone) && !/^[\d\s\-+()]{7,20}$/.test(payload.phone)){
-    tip.textContent = '请输入有效的联系电话';
-    tip.className = 'form-tip show error';
-    return;
-  }
-
-  const originalText = submitBtn.textContent;
-  submitBtn.disabled = true;
-  submitBtn.textContent = '提交中…';
-  tip.className = 'form-tip';
-
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-
-    form.reset();
-    tip.textContent = '✓ 提交成功！我们将尽快与您联系。';
-    tip.className = 'form-tip show';
-    setTimeout(() => { tip.className = 'form-tip'; }, 6000);
-  } catch(err){
-    const mailBody = encodeURIComponent(
-      `姓名：${payload.name}\n` +
-      `电话：${payload.phone}\n` +
-      `公司：${payload.company || '未填写'}\n` +
-      `意向：${payload.type || '未选择'}\n` +
-      `需求：${payload.message}`
-    );
-    window.location.href =
-      `mailto:2292454958@qq.com?subject=${encodeURIComponent('官网咨询')}&body=${mailBody}`;
-
-    tip.textContent = '已为您打开邮件客户端，或直接致电 020-32369552。';
-    tip.className = 'form-tip show';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-  }
-});
-
-/* =========================================================
-   产品数据加载
-   ========================================================= */
-function esc(s){
-  return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-async function loadProducts(){
-  const grid = document.getElementById('product-grid');
-  if(!grid) return;
-
-  try{
-    const res = await fetch('./products.json', { cache: 'no-cache' });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-
-    const data  = await res.json();
-    const items = Array.isArray(data.items) ? data.items : [];
-
-    if(!items.length){
-      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748B">暂无产品数据</p>';
-      return;
-    }
-
-    grid.innerHTML = items.map(p => {
-      const feats = (p.features || [])
-        .map(f => `<span>${esc(f)}</span>`).join('');
-
-      return `
-        <article class="product-card">
-          <div class="product-media ${esc(p.theme || '')}">
-            <img src="${esc(p.image || '')}"
-                 alt="${esc(p.title || '')}"
-                 loading="lazy"
-                 decoding="async"
-                 onerror="this.dataset.error='true'">
-            <svg class="ph" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.5"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/>
-              <path d="M3.3 7 12 12l8.7-5M12 22V12"/>
-            </svg>
-          </div>
-          <div class="product-body">
-            <span class="ptag">${esc(p.tag || '')}</span>
-            <h3>${esc(p.title || '')}</h3>
-            <p>${esc(p.desc || '')}</p>
-            <div class="product-feats">${feats}</div>
-          </div>
-        </article>`;
-    }).join('');
-
-  }catch(err){
-    console.error('加载 products.json 失败：', err);
-    grid.innerHTML =
-      '<p style="grid-column:1/-1;text-align:center;color:#B91C1C">产品数据加载失败，请刷新重试</p>';
-  }
-}
-
-loadProducts();
-</script>
-</body>
-</html>
+            </div
