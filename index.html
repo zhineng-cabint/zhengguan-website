@@ -337,13 +337,14 @@
   }
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
+  /* 图片变大的调整 */
   .product-media{
     position:relative;
     width:100%;
-    height:260px;
+    height:320px;
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
-    padding:40px 30px;
+    padding:20px;
     background:#EEF4FD;
   }
   .product-media::after{
@@ -390,12 +391,14 @@
     font-size:12.5px;color:var(--navy-2);background:var(--light);
     padding:5px 12px;border-radius:7px;border:1px solid var(--border);
   }
+  
+  /* 大屏幕 3 列时，高度稍微降一点更协调 */
   @media(min-width:1100px){
     .product-grid{grid-template-columns:repeat(3,1fr);gap:22px}
     .product-body{padding:22px 22px 24px}
     .product-body h3{font-size:18px}
     .product-body p{font-size:13.5px}
-    .product-media{height: 220px; padding: 30px 20px;}
+    .product-media{height:280px; padding:20px;}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
 
@@ -1408,7 +1411,7 @@ async function loadProducts() {
   try {
     const res = await fetch('/products.json');
     const data = await res.json();
-    const products = data.items; // 这里修改了：读取 items 数组
+    const products = data.items; // 读取 items 数组
     const grid = document.getElementById('product-grid');
     if(!grid) return;
     
