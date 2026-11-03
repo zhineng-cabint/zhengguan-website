@@ -60,7 +60,7 @@
   .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--navy)}
   .hamburger svg{width:26px;height:26px}
 
-  /* 页面切换动画 */
+  /* 页面切换 */
   .page{display:none}
   .page.active{display:block;animation:pageIn .5s cubic-bezier(.22,.61,.36,1)}
   @keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -177,13 +177,13 @@
   @media(max-width:900px){.ability-grid{grid-template-columns:1fr 1fr}}
 
   /* =========================================
-     产品中心（重点修复区：底框 + 白色相框 + 不裁剪）
+     产品中心（纯净版底框 + 完整显示）
      ========================================= */
   .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .product-card{background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all .35s;}
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
-  /* 1. 彩色底框区域 */
+  /* 1. 彩色底框区域，保留内边距留白 */
   .product-media{
     position:relative;
     width:100%;
@@ -192,11 +192,10 @@
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    padding:30px; /* 加大内边距，留出彩色底框的空间 */
-    /* 颜色由 pm-1 ~ pm-9 提供 */
+    padding:24px; /* 这里控制底框露出的宽度 */
   }
   
-  /* 2. 恢复背景半透明圆圈装饰 */
+  /* 2. 背景半透明圆圈装饰 */
   .product-media::after{
     content:"";
     position:absolute;
@@ -210,7 +209,7 @@
     z-index:1;
   }
 
-  /* 3. 图片做成“白色相框”，保证 100% 不裁剪 */
+  /* 3. 图片直接完整显示，去掉白底、内边距和阴影 */
   .product-media img{
     position:relative;
     z-index:2;
@@ -218,12 +217,9 @@
     max-height:100%;
     width:auto;
     height:auto;
-    object-fit:contain; 
+    object-fit:contain; /* 绝对保证图片不裁剪 */
     display:block;
-    border-radius:12px;
-    background-color:#fff; /* 白色相框底 */
-    padding:12px; /* 白色相框边距 */
-    box-shadow:0 12px 28px rgba(0,0,0,0.15); /* 立体阴影 */
+    border-radius:8px; /* 给图片一点点圆角，更贴合底框 */
     transition:transform .55s cubic-bezier(.22,.61,.36,1);
     will-change:transform;
   }
@@ -231,7 +227,7 @@
   .product-media img[data-error="true"]{opacity:0;pointer-events:none}
   
   @media (hover:hover) and (pointer:fine){
-    .product-card:hover .product-media img{transform:scale(1.03)}
+    .product-card:hover .product-media img{transform:scale(1.04)}
   }
   
   .product-media .ph{
@@ -243,7 +239,7 @@
     pointer-events:none;
   }
 
-  /* 4. 恢复所有彩色渐变背景 */
+  /* 4. 彩色渐变背景 */
   .pm-1{background:linear-gradient(135deg,#1E6FD9,#3B8BE8)}
   .pm-2{background:linear-gradient(135deg,#0B2447,#133A63)}
   .pm-3{background:linear-gradient(135deg,#D4A441,#E8B85A)}
@@ -266,10 +262,10 @@
     .product-body{padding:22px 22px 24px}
     .product-body h3{font-size:18px}
     .product-body p{font-size:13.5px}
-    .product-media{height:280px;padding:25px;}
+    .product-media{height:280px;padding:20px;}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
-  @media(max-width:860px){.product-media{height:260px;padding:20px;}}
+  @media(max-width:860px){.product-media{height:260px;padding:16px;}}
   @media(max-width:520px){.product-media{height:220px}.product-body{padding:22px 20px 24px}}
 
   .product-advantages{margin-top:64px;background:var(--light);border-radius:24px;padding:48px;border:1px solid var(--border);}
@@ -571,6 +567,36 @@
       </div>
     </div>
   </section>
+
+  <section class="adv-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">核心优势</span>
+        <h2>为什么选择臻冠科技</h2>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>全品类覆盖</h4><p>寄存、存取、管控、存储设备全覆盖</p></div></div>
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>OEM/ODM 支持</h4><p>贴牌代工与整案开发，客户自有品牌销售</p></div></div>
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>软硬件一体自研</h4><p>可深度定制功能逻辑与系统界面</p></div></div>
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>多识别方式</h4><p>扫码、刷卡、密码、人脸、掌纹任选</p></div></div>
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>场景适配强</h4><p>室内、户外、恒温、消毒均可定制</p></div></div>
+        <div class="adv-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>源头工厂交付</h4><p>可大批量稳定交付，品质可控</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h3>有智能柜定制 / 贴牌 / 批量采购需求？</h3>
+        <p>免费提供项目方案、配置建议与精准报价，一对一工程师对接</p>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="goPage('contact')">立即咨询</button>
+        <a href="tel:02032369552" class="btn btn-ghost">020-32369552</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ================= 关于我们 ================= -->
@@ -613,6 +639,14 @@
       <div class="product-grid" id="product-grid">
         <!-- 这里由 JS 自动填充 9 个产品 -->
       </div>
+      <div class="product-advantages">
+        <h3>核心产品优势</h3>
+        <div class="pa-grid">
+          <div class="pa-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><strong>全品类覆盖</strong><span>寄存、存取、管控、存储设备全覆盖</span></div></div>
+          <div class="pa-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><strong>OEM/ODM 支持</strong><span>贴牌代工、ODM 整案开发</span></div></div>
+          <div class="pa-item"><div class="adv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div><strong>软硬件一体自研</strong><span>可深度定制功能</span></div></div>
+        </div>
+      </div>
     </div>
   </section>
 </section>
@@ -620,40 +654,105 @@
 <!-- ================= 服务方案 ================= -->
 <section class="page" id="page-solutions">
   <div class="about-hero"><div class="container"><h1>服务方案优选</h1><p>按需匹配 · 一站式智能柜定制服务</p></div></div>
+  
   <section>
     <div class="container">
+      <div class="section-head"><span class="eyebrow">合作模式</span><h2>三种标准化合作方案</h2></div>
       <div class="plan-grid">
         <div class="plan-card featured">
           <div class="plan-flag">品牌客户首选</div>
           <div class="plan-no">方案一</div>
           <h3>ODM 整案定制</h3>
+          <p class="plan-sub">适合：自有品牌、想打造专属产品的企业、集成商、项目方</p>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>我方负责全套自研与生产</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>客户可自有品牌独立销售</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>我方负责结构设计、钣金生产、硬件集成、软件开发、系统后台全套自研</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>可定制外观造型、柜体尺寸、功能逻辑、系统界面、LOGO 品牌、专属功能</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>客户可自有品牌独立对外销售</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>流程：需求沟通 → 方案设计 → 样机测试 → 批量生产 → 交付售后</li>
           </ul>
           <button class="btn btn-primary" onclick="goPage('contact')">咨询 ODM 定制</button>
         </div>
+
         <div class="plan-card">
           <div class="plan-no">方案二</div>
           <h3>OEM 贴牌代工</h3>
+          <p class="plan-sub">适合：已有成熟方案、图纸、功能需求，只需工厂代工生产</p>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>严格按照客户标准生产</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>纯代工生产、品质可控</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>严格按照客户方案、参数、标准生产装配</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>支持客户自有系统对接、自有软件适配</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>纯代工生产、品质可控、交付稳定</li>
           </ul>
           <button class="btn btn-plan" onclick="goPage('contact')">咨询 OEM 代工</button>
         </div>
+
         <div class="plan-card">
           <div class="plan-no">方案三</div>
           <h3>标准机型采购</h3>
+          <p class="plan-sub">适合：快速落地、无需复杂定制的常规项目</p>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>成熟现货机型直接落地使用</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>交付周期短、成本可控</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>成熟现货机型：微信扫码柜、人脸识别存包柜、掌纹识别存包柜、收费扫码存包柜、物品自提柜、智能取餐柜、智能工具柜、智能手机寄存柜</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>交付周期短、成本可控、直接落地使用</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>支持小幅配色、格口数量微调</li>
           </ul>
           <button class="btn btn-plan" onclick="goPage('contact')">咨询标准采购</button>
         </div>
       </div>
     </div>
   </section>
+
+  <section class="flow-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">定制流程</span>
+        <h2>完整定制服务流程</h2>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-step"><div class="flow-num">1</div><h4>需求沟通</h4><p>确认场景、尺寸、功能、数量、特殊要求</p></div>
+        <div class="flow-step"><div class="flow-num">2</div><h4>方案评估</h4><p>出具项目方案、配置清单、正式报价</p></div>
+        <div class="flow-step"><div class="flow-num">3</div><h4>样机制作</h4><p>样机打样、功能测试、客户确认</p></div>
+        <div class="flow-step"><div class="flow-num">4</div><h4>批量生产</h4><p>钣金加工、硬件装配、系统调试</p></div>
+        <div class="flow-step"><div class="flow-num">5</div><h4>全检出货</h4><p>整机功能、稳定性、外观严格质检</p></div>
+        <div class="flow-step"><div class="flow-num">6</div><h4>交付落地</h4><p>发货安装指导、技术支持、售后维保</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="container value-add">
+      <div class="section-head">
+        <span class="eyebrow">增值配套</span>
+        <h2>增值配套服务</h2>
+      </div>
+      <div class="va-grid">
+        <div class="va-item">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><h4>智能后台管理系统</h4><p>小程序端配套交付，设备状态、订单、数据统一管理</p></div>
+        </div>
+        <div class="va-item">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+          <div><h4>第三方 API 对接</h4><p>平台数据对接、系统集成开发</p></div>
+        </div>
+        <div class="va-item">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4z"/></svg></div>
+          <div><h4>特殊功能升级</h4><p>户外防水、恒温、消毒、防盗等特殊功能定制</p></div>
+        </div>
+        <div class="va-item">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div><h4>项目资料支持</h4><p>技术资料、方案文档、售后全程支持</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h3>不确定选哪种合作模式？</h3>
+        <p>告诉我们项目情况，我们帮您匹配最合适的方案</p>
+      </div>
+      <button class="btn btn-primary" onclick="goPage('contact')">免费方案评估</button>
+    </div>
+  </div>
 </section>
 
 <!-- ================= 客户案例 ================= -->
@@ -661,18 +760,78 @@
   <div class="about-hero"><div class="container"><h1>客户案例</h1><p>真实落地智能存储解决方案</p></div></div>
   <section>
     <div class="container">
+      <div class="section-head" style="margin-bottom:48px">
+        <span class="eyebrow">案例导语</span>
+        <h2>全行业落地场景</h2>
+        <p>多年来，臻冠科技已为园区、写字楼、校园、景区、工厂、政企单位、工程集成商、品牌企业完成大量智能柜落地项目，积累丰富的场景定制与批量代工经验。</p>
+      </div>
+
       <div class="case-grid">
         <article class="case-card">
-          <div class="case-top"><h3>产业园区 · 户外微信扫码柜</h3></div>
-          <div class="case-body"><p>工业园区、企业园区、物业驿站。</p></div>
+          <div class="case-top">
+            <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg></div>
+            <div class="ctitle"><span>案例 01</span><h3>产业园区 · 户外微信扫码柜</h3></div>
+          </div>
+          <div class="case-body">
+            <div class="case-row"><span class="k">场景</span><span class="v">工业园区、企业园区、物业驿站</span></div>
+            <div class="case-row"><span class="k">方案</span><span class="v">户外防雨智能扫码柜、多格口组合、物业后台管理</span></div>
+            <div class="case-mode">合作模式：<strong>ODM 定制</strong></div>
+          </div>
         </article>
+
         <article class="case-card">
-          <div class="case-top"><h3>写字楼 · 智能消毒取餐柜</h3></div>
-          <div class="case-body"><p>高端写字楼、企业食堂。</p></div>
+          <div class="case-top">
+            <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></div>
+            <div class="ctitle"><span>案例 02</span><h3>写字楼 · 智能消毒取餐柜</h3></div>
+          </div>
+          <div class="case-body">
+            <div class="case-row"><span class="k">场景</span><span class="v">高端写字楼、企业食堂、团餐配送</span></div>
+            <div class="case-row"><span class="k">方案</span><span class="v">恒温 + 消毒智能取餐柜，适配办公场景装修风格</span></div>
+            <div class="case-mode">合作模式：<strong>ODM 定制开发</strong></div>
+          </div>
         </article>
+
+        <article class="case-card">
+          <div class="case-top">
+            <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 20h20M4 20V8l5-4v16M20 20V10l-6-3M8 8h.01M8 12h.01M8 16h.01"/></svg></div>
+            <div class="ctitle"><span>案例 03</span><h3>工厂厂区 · 工具管控 + 手机寄存</h3></div>
+          </div>
+          <div class="case-body">
+            <div class="case-row"><span class="k">场景</span><span class="v">生产工厂、涉密厂区、军事化管理企业</span></div>
+            <div class="case-row"><span class="k">方案</span><span class="v">智能工具领用柜、手机集中寄存柜，权限分级、记录溯源</span></div>
+            <div class="case-mode">合作模式：<strong>OEM 批量代工</strong></div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-top">
+            <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 18h20M4 18V9l8-6 8 6v9M9 18v-5h6v5"/><circle cx="12" cy="8" r="1.5"/></svg></div>
+            <div class="ctitle"><span>案例 04</span><h3>公共场景 · 景区游泳馆人脸识别存包柜</h3></div>
+          </div>
+          <div class="case-body">
+            <div class="case-row"><span class="k">场景</span><span class="v">景区、体育馆、游泳馆、公共服务大厅</span></div>
+            <div class="case-row"><span class="k">方案</span><span class="v">防水防锈人脸识别存包柜、无感存取、免费寄存</span></div>
+            <div class="case-mode">合作模式：<strong>标准机型 + 场景微调定制</strong></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="case-note">
+        <strong>无论标准项目或复杂非标定制项目，我们均可快速输出落地方案。</strong><br>
+        欢迎各类工程、渠道、品牌客户长期合作对接。
       </div>
     </div>
   </section>
+
+  <div class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h3>想了解与您场景相似的落地案例？</h3>
+        <p>联系我们，获取对应行业的方案参考</p>
+      </div>
+      <button class="btn btn-primary" onclick="goPage('contact')">咨询案例方案</button>
+    </div>
+  </div>
 </section>
 
 <!-- ================= 联系我们 ================= -->
@@ -683,20 +842,65 @@
       <div class="contact-wrap">
         <div class="contact-info">
           <h3>欢迎合作</h3>
-          <p>欢迎各行业工程商、集成商咨询。</p>
+          <p>欢迎各行业工程商、集成商、采购方、品牌企业咨询洽谈，我们将免费为您提供项目方案、配置建议、精准报价。</p>
           <div class="ci-list">
-            <div class="ci-item"><div class="ci-label">业务热线</div><div class="ci-value">020-32369552</div></div>
-            <div class="ci-item"><div class="ci-label">公司地址</div><div class="ci-value">广州市花都区新雅街道</div></div>
+            <div class="ci-item">
+              <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <div><div class="ci-label">业务热线</div><div class="ci-value"><a href="tel:02032369552">020-32369552</a></div></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></div>
+              <div><div class="ci-label">商务邮箱</div><div class="ci-value"><a href="mailto:2292454958@qq.com">2292454958@qq.com</a></div></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><div class="ci-label">公司地址</div><div class="ci-value">广州市花都区新雅街道团结村团结路自编 3-8</div></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><div class="ci-label">工作时间</div><div class="ci-value">周一至周五 9:00 - 18:00</div></div>
+            </div>
           </div>
         </div>
+
         <div class="contact-form-box">
           <h3>在线咨询</h3>
-          <form id="contactForm" class="form-grid">
-            <input type="text" name="name" placeholder="您的姓名" required>
-            <input type="tel" name="phone" placeholder="联系电话" required>
-            <textarea name="message" placeholder="需求描述" required></textarea>
-            <button type="submit" class="btn form-submit">提交</button>
-            <div class="form-tip" id="formTip"></div>
+          <p>如有智能柜采购、场景定制、贴牌代工、批量项目需求，欢迎随时联系，一对一工程师对接服务，快速落地您的智能存储项目。</p>
+          <form class="form-grid" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name">您的姓名 <span class="req">*</span></label>
+                <input type="text" id="f-name" name="name" placeholder="请输入姓名" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="f-phone">联系电话 <span class="req">*</span></label>
+                <input type="tel" id="f-phone" name="phone" placeholder="请输入手机号" autocomplete="tel" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-company">公司名称</label>
+                <input type="text" id="f-company" name="company" placeholder="请输入公司名称" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="f-type">合作意向</label>
+                <select id="f-type" name="type">
+                  <option value="">请选择</option>
+                  <option>ODM 整案定制</option>
+                  <option>OEM 贴牌代工</option>
+                  <option>标准机型采购</option>
+                  <option>非标定制开发</option>
+                  <option>其他合作</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-message">需求描述 <span class="req">*</span></label>
+              <textarea id="f-message" name="message" placeholder="请简要描述您的需求，例如产品品类、应用场景、尺寸/功能要求、预计数量等……" required></textarea>
+            </div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
+            <button type="submit" class="btn form-submit">提交咨询</button>
+            <div class="form-tip" id="formTip" role="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -705,9 +909,66 @@
 </section>
 </main>
 
+<!-- 页脚 -->
 <footer>
   <div class="container">
-    <div class="foot-bottom"><span>© 2025 广州臻冠信息科技有限公司 版权所有</span></div>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand" role="button" tabindex="0" aria-label="返回首页" onclick="goPage('home')">
+          <div class="brand-mark">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 30 L50 10 L50 90 L10 70 Z" fill="rgba(255,255,255,0.15)"/>
+              <path d="M50 10 L90 30 L90 70 L70 80 L70 65 L75 60 L73 50 L78 45 L74 35 L60 25 L55 20 L50 25 Z" fill="#fff"/>
+              <rect x="60" y="40" width="14" height="14" rx="2" fill="#0B2447"/>
+              <path d="M64 40 V36 M70 40 V36 M64 54 V58 M70 54 V58 M60 44 H56 M60 50 H56 M74 44 H78 M74 50 H78" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="64" y="44" width="6" height="6" rx="1" fill="none" stroke="#fff" stroke-width="1"/>
+              <path d="M10 70 L50 90 L90 70" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="brand-text"><strong>臻冠智存</strong><span>ZHEN GUAN SMART STORAGE</span></div>
+        </div>
+        <p>广州臻冠信息科技有限公司，专注全品类智能柜定制、生产、销售与 OEM/ODM 代工，一站式智能存储解决方案。</p>
+      </div>
+
+      <div class="foot-col">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a onclick="goPage('home')">首页</a></li>
+          <li><a onclick="goPage('about')">关于我们</a></li>
+          <li><a onclick="goPage('products')">产品中心</a></li>
+          <li><a onclick="goPage('solutions')">服务方案</a></li>
+          <li><a onclick="goPage('cases')">客户案例</a></li>
+          <li><a onclick="goPage('contact')">联系我们</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>产品中心</h4>
+        <ul>
+          <li><a onclick="goPage('products')">微信扫码柜</a></li>
+          <li><a onclick="goPage('products')">人脸识别存包柜</a></li>
+          <li><a onclick="goPage('products')">掌纹识别存包柜</a></li>
+          <li><a onclick="goPage('products')">收费扫码存包柜</a></li>
+          <li><a onclick="goPage('products')">物品自提柜</a></li>
+          <li><a onclick="goPage('products')">非标定制智能柜</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>联系方式</h4>
+        <ul class="foot-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:02032369552">020-32369552</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><a href="mailto:2292454958@qq.com">2292454958@qq.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>广州市花都区新雅街道团结村团结路自编 3-8</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>周一至周五 9:00 - 18:00</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2025 广州臻冠信息科技有限公司 版权所有</span>
+      <span>全品类智能柜定制 · OEM/ODM 源头工厂</span>
+    </div>
   </div>
 </footer>
 
@@ -744,7 +1005,81 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================================================
-   2. 加载产品数据
+   2. 移动端菜单与导航阴影
+   ========================================================= */
+const hamburger = document.getElementById('hamburger');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    const menu = document.getElementById('navMenu');
+    if(menu) {
+      const open = menu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(open));
+    }
+  });
+}
+
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if(header) header.classList.toggle('scrolled', window.scrollY > 8);
+});
+
+/* =========================================================
+   3. 表单提交（带降级处理）
+   ========================================================= */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const form = e.target;
+    const els = form.elements;
+    const tip = document.getElementById('formTip');
+    const submitBtn = form.querySelector('.form-submit');
+
+    const payload = {
+      name:    (els['name'].value    || '').trim(),
+      phone:   (els['phone'].value   || '').trim(),
+      company: (els['company'].value || '').trim(),
+      type:    (els['type'].value    || '').trim(),
+      message: (els['message'].value || '').trim(),
+      website: (els['website'].value || '').trim()
+    };
+
+    if(!payload.name || !payload.phone || !payload.message){
+      tip.textContent = '请填写姓名、联系电话和需求描述';
+      tip.className = 'form-tip show error';
+      return;
+    }
+
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '提交中…';
+    tip.className = 'form-tip';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      form.reset();
+      tip.textContent = '✓ 提交成功！我们将尽快与您联系。';
+      tip.className = 'form-tip show';
+      setTimeout(() => { tip.className = 'form-tip'; }, 6000);
+    } catch(err){
+      const mailBody = encodeURIComponent(`姓名：${payload.name}\n电话：${payload.phone}\n公司：${payload.company}\n需求：${payload.message}`);
+      window.location.href = `mailto:2292454958@qq.com?subject=${encodeURIComponent('官网咨询')}&body=${mailBody}`;
+      tip.textContent = '已打开邮件客户端，或直接致电 020-32369552。';
+      tip.className = 'form-tip show';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+}
+
+/* =========================================================
+   4. 加载产品数据
    ========================================================= */
 function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
