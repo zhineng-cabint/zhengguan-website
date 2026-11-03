@@ -176,11 +176,14 @@
   .ability-item span{font-size:14px;color:var(--muted);display:block;margin-top:6px}
   @media(max-width:900px){.ability-grid{grid-template-columns:1fr 1fr}}
 
-  /* 产品中心（核心修复区：取消深色遮罩，放大图片） */
+  /* =========================================
+     产品中心（重点修复区：底框 + 白色相框 + 不裁剪）
+     ========================================= */
   .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .product-card{background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all .35s;}
   .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#CBD5E1}
 
+  /* 1. 彩色底框区域 */
   .product-media{
     position:relative;
     width:100%;
@@ -189,40 +192,67 @@
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    padding:10px; 
-    background:#F8FAFC; /* 浅色清爽背景 */
-    border-bottom:1px solid var(--border);
+    padding:30px; /* 加大内边距，留出彩色底框的空间 */
+    /* 颜色由 pm-1 ~ pm-9 提供 */
   }
   
-  /* 隐藏之前的圆圈遮罩 */
-  .product-media::after{ display:none; }
+  /* 2. 恢复背景半透明圆圈装饰 */
+  .product-media::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    top:-80px;
+    right:-60px;
+    pointer-events:none;
+    z-index:1;
+  }
 
+  /* 3. 图片做成“白色相框”，保证 100% 不裁剪 */
   .product-media img{
     position:relative;
     z-index:2;
-    width:100%;
-    height:100%;
-    object-fit:contain; /* 保证图片不裁剪、不变形 */
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit:contain; 
     display:block;
-    border-radius:6px;
+    border-radius:12px;
+    background-color:#fff; /* 白色相框底 */
+    padding:12px; /* 白色相框边距 */
+    box-shadow:0 12px 28px rgba(0,0,0,0.15); /* 立体阴影 */
     transition:transform .55s cubic-bezier(.22,.61,.36,1);
     will-change:transform;
   }
+  
   .product-media img[data-error="true"]{opacity:0;pointer-events:none}
+  
   @media (hover:hover) and (pointer:fine){
     .product-card:hover .product-media img{transform:scale(1.03)}
   }
+  
   .product-media .ph{
     position:absolute;
     z-index:1;
     width:40px;
     height:40px;
-    color:#CBD5E1;
+    color:rgba(255,255,255,.8);
     pointer-events:none;
   }
 
-  /* 统一抹去旧的主题彩色背景 */
-  .pm-1,.pm-2,.pm-3,.pm-4,.pm-5,.pm-6,.pm-7,.pm-8,.pm-9 { background:#F8FAFC; }
+  /* 4. 恢复所有彩色渐变背景 */
+  .pm-1{background:linear-gradient(135deg,#1E6FD9,#3B8BE8)}
+  .pm-2{background:linear-gradient(135deg,#0B2447,#133A63)}
+  .pm-3{background:linear-gradient(135deg,#D4A441,#E8B85A)}
+  .pm-4{background:linear-gradient(135deg,#0F766E,#14B8A6)}
+  .pm-5{background:linear-gradient(135deg,#7C3AED,#A78BFA)}
+  .pm-6{background:linear-gradient(135deg,#9A3412,#EA580C)}
+  .pm-7{background:linear-gradient(135deg,#5B21B6,#8B5CF6)}
+  .pm-8{background:linear-gradient(135deg,#B45309,#F59E0B)}
+  .pm-9{background:linear-gradient(135deg,#0E7490,#06B6D4)}
 
   .product-body{padding:28px 28px 30px;flex:1;display:flex;flex-direction:column}
   .product-body .ptag{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--blue);background:#EEF4FD;padding:5px 13px;border-radius:99px;margin-bottom:14px;}
@@ -230,15 +260,16 @@
   .product-body p{font-size:14.5px;color:#475569;line-height:1.85;flex:1}
   .product-feats{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
   .product-feats span{font-size:12.5px;color:var(--navy-2);background:var(--light);padding:5px 12px;border-radius:7px;border:1px solid var(--border);}
+  
   @media(min-width:1100px){
     .product-grid{grid-template-columns:repeat(3,1fr);gap:22px}
     .product-body{padding:22px 22px 24px}
     .product-body h3{font-size:18px}
     .product-body p{font-size:13.5px}
-    .product-media{height:280px;padding:10px;}
+    .product-media{height:280px;padding:25px;}
   }
   @media(max-width:860px){.product-grid{grid-template-columns:1fr}}
-  @media(max-width:860px){.product-media{height:260px;padding:10px;}}
+  @media(max-width:860px){.product-media{height:260px;padding:20px;}}
   @media(max-width:520px){.product-media{height:220px}.product-body{padding:22px 20px 24px}}
 
   .product-advantages{margin-top:64px;background:var(--light);border-radius:24px;padding:48px;border:1px solid var(--border);}
@@ -682,65 +713,38 @@
 
 <script>
 /* =========================================================
-   1. 页面路由逻辑（最优先执行，加满防错，确保按钮绝对可用）
+   1. 页面路由逻辑（防错处理，确保按钮不会失效）
    ========================================================= */
 function goPage(id){
   const pages = ['home','about','products','solutions','cases','contact'];
   if(!pages.includes(id)) id = 'home';
 
-  // 隐藏所有页面，显示目标页面
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + id);
   if(target) target.classList.add('active');
 
-  // 切换导航栏高亮
   document.querySelectorAll('.nav-link').forEach(l => {
     l.classList.toggle('active', l.dataset.page === id);
   });
 
-  // 关闭移动端菜单
   const menu = document.getElementById('navMenu');
   if(menu) menu.classList.remove('open');
   
-  // 修改 URL
   if(location.hash !== '#' + id) location.hash = id;
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
-// 监听浏览器前进后退
 window.addEventListener('hashchange', () => {
   goPage(location.hash.replace('#','') || 'home');
 });
 
-// 初始化页面
 document.addEventListener('DOMContentLoaded', () => {
   goPage(location.hash.replace('#','') || 'home');
-  loadProducts(); // 单独调用，防止因图片报错影响路由
+  loadProducts(); 
 });
 
 /* =========================================================
-   2. 其它交互逻辑（带防御性判断，元素不存在也不报错）
-   ========================================================= */
-// 移动端菜单按钮
-const hamburger = document.getElementById('hamburger');
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    const menu = document.getElementById('navMenu');
-    if(menu) {
-      const open = menu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', String(open));
-    }
-  });
-}
-
-// 导航栏滚动阴影
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('header');
-  if(header) header.classList.toggle('scrolled', window.scrollY > 8);
-});
-
-/* =========================================================
-   3. 加载产品数据
+   2. 加载产品数据
    ========================================================= */
 function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -763,7 +767,7 @@ async function loadProducts(){
 
     grid.innerHTML = items.map(p => `
       <article class="product-card">
-        <div class="product-media">
+        <div class="product-media ${esc(p.theme || '')}">
           <img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" onerror="this.dataset.error='true'">
           <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/></svg>
         </div>
@@ -776,8 +780,8 @@ async function loadProducts(){
       </article>
     `).join('');
   } catch(err) {
-    console.log('产品加载失败（不影响页面切换）：', err);
-    grid.innerHTML = '<p style="text-align:center;width:100%;color:red;">产品数据加载失败，请检查 products.json 路径。</p>';
+    console.log('产品加载失败：', err);
+    grid.innerHTML = '<p style="text-align:center;width:100%;color:red;">数据加载失败，请检查 products.json 路径。</p>';
   }
 }
 </script>
